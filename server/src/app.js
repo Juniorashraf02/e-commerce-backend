@@ -4,6 +4,7 @@ const router = express.Router();
 const createError = require('http-errors');
 // const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
+const userRouter = require('./router/userRouter');
 
 
 const app = express();
@@ -20,11 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(xssClean());
 
+app.use("/api/user", userRouter);
+
 app.get('/test', (req, res) => {
     res.status(200).send({
         message: "get api is working fine"
     })
 });
+
 
 app.post('/test', (req, res) => {
     res.status(200).send({
